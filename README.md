@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # vue-h5-template
 
 基于 vue-cli4.0 + webpack 4 + vant ui + sass+ rem 适配方案+axios 封装，构建手机端模板脚手架
@@ -1147,6 +1146,3 @@ Vscode setting.json 设置
 </p>
  
 如果对你有帮助送我一颗小星星（づ￣3￣）づ╭❤～
-=======
-# h5-vant-demo
->>>>>>> ef7885198f077dd003e8ad30a2451cba98b8010d
