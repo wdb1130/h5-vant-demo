@@ -2,7 +2,6 @@
 <template>
   <div class="index-container">
     <div class="panel bg_black">
-      <!-- <van-cell v-for="(item, idx) in equipmet" :key="idx" :title="item.type" /> -->
       <van-row class="high_light_text">
         <van-col span="12"> 账户：{{17737373732}} </van-col>
         <van-col span="12"> {{currentDate}} </van-col>
@@ -54,6 +53,8 @@
 </template>
 
 <script>
+import { getUserInfo } from '@/api/user.js'
+// import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -80,7 +81,9 @@ export default {
     }
   },
 
-  computed: {},
+  computed: {
+    // ...mapGetters(['userName'])
+  },
 
   mounted() {
     this.currentDate = this.getNowFormatDate();
@@ -100,7 +103,14 @@ export default {
       }
       var currentdate = year + '年' + month + '月' + strDate + '日';
       return currentdate;
-    }
+    },
+    initData() {
+      // 请求接口数据，仅作为展示，需要配置src->config下环境文件
+      const params = { user: 'sunnie' }
+      getUserInfo(params)
+        .then(() => { })
+        .catch(() => { })
+    },
   }
 }
 </script>

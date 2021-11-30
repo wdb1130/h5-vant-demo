@@ -32,6 +32,7 @@
 </template>
 
 <script>
+import { login } from '@/api/user.js'
 export default {
   data() {
     return {
@@ -47,7 +48,17 @@ export default {
 
   methods: {
     onSubmit(values){
-      console.log('submit', values)
+      login(values).then((res)=>{
+        // 判断用户信息
+        // 普通用户
+        this.$router.push('/info')
+        // 管理员
+        // this.$router.push('/list')
+      })
+      .catch(() => { 
+        console.log(111)
+      })
+
     }
   }
 }

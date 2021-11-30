@@ -21,6 +21,57 @@ export function getUserInfo(data) {
   })
 }
 
+// 更新用户信息
+export function editUserInfo(data) {
+  return request({
+    url: api.EditUserInfo,
+    method: 'post',
+    data,
+    hideloading: true
+  })
+}
+
+// 用户信息 post 方法
+export function getUserList(data) {
+  return request({
+    url: api.UserList,
+    method: 'post',
+    data,
+    hideloading: true
+  })
+}
+
+// 添加用户
+export function addUser(data) {
+  return request({
+    url: api.AddUser,
+    method: 'post',
+    data,
+    hideloading: false
+  })
+}
+
+// 删除用户 get
+export function delUser(data) {
+  return request({
+    url: api.DelUser,
+    method: 'get',
+    data,
+    hideloading: false
+  })
+}
+
+// 用户信息 post 方法
+export function modifyUser(data) {
+  return request({
+    url: api.ModifyUser,
+    method: 'post',
+    data,
+    hideloading: false
+  })
+}
+
+
 // 用户名称 get 方法
 export function getUserName(params) {
   return request({

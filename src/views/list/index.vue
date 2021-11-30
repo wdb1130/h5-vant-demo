@@ -24,6 +24,7 @@
 </template>
 
 <script>
+import { delUser, addUser } from '@/api/user.js'
 export default {
   data() {
     return {
@@ -46,8 +47,11 @@ export default {
       // 修改密码
       this.$router.push({path:'/modify',query: {userId: id,username: id}});
     },
-    del(){
-
+    del(id){
+      const params = { userId: id }
+      delUser(params)
+      .then(() => { })
+      .catch(() => { })
     },
     add(){
       this.$router.push({path:'/modify'});

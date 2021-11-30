@@ -61,6 +61,7 @@
 </template>
 
 <script>
+import { editUserInfo } from '@/api/user.js'
 export default {
   data() {
     return {
@@ -94,7 +95,16 @@ export default {
 
   methods: {
     submitInfo() {
-      console.log(this.balance)
+      console.log(this.balance);
+      const param = {};
+      editUserInfo(param).then((res)=>{
+        // 跳转至list页面 ? 
+        this.$router.push('/list');
+        // dialog 修改成功
+      }).
+      catch(()=>{
+
+      })
     }
   }
 }

@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import {modifyUser, addUser} from '@/api/user'
 export default {
   data() {
     return {
@@ -52,6 +53,16 @@ export default {
   methods: {
     onSubmit(values){
       console.log('submit', values)
+      const params = { userId: id }
+      if(this.btnType === '新增'){
+        addUser(params).then(() => {
+          this.$router.push({path:'/list'});
+        })
+      }else {
+        modifyUser(params).then(() => {
+          this.$router.push({path:'/list'});
+        })
+      }
     }
   }
 }
