@@ -33,6 +33,18 @@ export const constantRouterMap = [
         meta: { title: '用户列表', keepAlive: false }
       },
       {
+        path: '/edit',
+        name: 'Edit',
+        component: () => import('@/views/editInfo/index'),
+        meta: { title: '信息编辑', keepAlive: false }
+      },
+      {
+        path: '/modify',
+        name: 'Modify',
+        component: () => import('@/views/editUser/index'),
+        meta: { title: '用户编辑', keepAlive: false }
+      },
+      {
         path: '/home',
         name: 'Home',
         component: () => import('@/views/home/index'),

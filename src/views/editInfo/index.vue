@@ -1,12 +1,10 @@
 <!-- home -->
 <template>
   <div class="index-container">
-    <div class="panel bg_black">
-      <!-- <van-cell v-for="(item, idx) in equipmet" :key="idx" :title="item.type" /> -->
-      <van-row class="high_light_text">
-        <van-col span="12"> 账户：{{17737373732}} </van-col>
-        <van-col span="12"> {{currentDate}} </van-col>
-      </van-row>
+    <van-row class="high_light_text" style="width: 120px;">
+      账户：{{17737373732}}
+    </van-row>
+    <div class="panel">
       <van-row>
         <van-col span="8"> 型号 </van-col>
         <van-col span="4"> 数量 </van-col>
@@ -15,15 +13,23 @@
       </van-row>
       <div class="list" v-for="(item, idx) in equipmet" :key="idx" >
         <van-row>
-          <van-col span="8">{{ item.type}}</van-col>
-          <van-col span="4">{{ item.num}}</van-col>
-          <van-col span="6">{{ item.onlineNum}}</van-col>
-          <van-col span="6">{{ item.USDT}}</van-col>
+          <van-col span="8">
+            <van-field v-model="item.type"/>
+          </van-col>
+          <van-col span="4">
+            <van-field v-model="item.num"/>
+          </van-col>
+          <van-col span="6">
+            <van-field v-model="item.onlineNum"/>
+          </van-col>
+          <van-col span="6">
+            <van-field v-model="item.USDT"/>
+          </van-col>
         </van-row>
       </div>
     </div>
+    <p class="high_light_text" style="width: 60px;">余额</p>
     <div class="panel">
-      <p class="high_light_text" style="width: 60px;">余额</p>
       <van-row>
         <van-col span="12"> 电费余额 </van-col>
         <van-col span="12"> *** </van-col>
@@ -31,24 +37,25 @@
       <div class="list" v-for="(item, idx) in balance" :key="idx+item.type" >
         <van-row>
           <van-col span="12">{{ item.type}}</van-col>
-          <van-col span="12">{{ item.money}}</van-col>
+          <van-col span="12">
+            <van-field v-model="item.money"/>
+          </van-col>
         </van-row>
       </div>
     </div>
+    <p class="high_light_text" style="width: 80px;">昨日产出</p>
     <div class="panel">
-      <p class="high_light_text" style="width: 80px;">昨日产出</p>
       <div class="list" v-for="(item, idx) in produce" :key="idx+item.type" >
         <van-row>
           <van-col span="12">{{ item.type}}</van-col>
-          <van-col span="12">{{ item.money}}</van-col>
+          <van-col span="12">
+            <van-field v-model="item.money"/>
+          </van-col>
         </van-row>
       </div>
     </div>
     <div class="footer">
-      <van-row>
-        <van-col span="12"> 客服微信：ETMINER888 </van-col>
-        <van-col span="12"> 更新时间：每日下午 </van-col>
-      </van-row>
+      <van-button block plain type="default" @click="submitInfo()">确定</van-button>
     </div>
   </div>
 </template>
@@ -83,35 +90,25 @@ export default {
   computed: {},
 
   mounted() {
-    this.currentDate = this.getNowFormatDate();
   },
 
   methods: {
-    getNowFormatDate() {
-      var date = new Date();
-      var year = date.getFullYear();
-      var month = date.getMonth() + 1;
-      var strDate = date.getDate();
-      if (month >= 1 && month <= 9) {
-          month = "0" + month;
-      }
-      if (strDate >= 0 && strDate <= 9) {
-          strDate = "0" + strDate;
-      }
-      var currentdate = year + '年' + month + '月' + strDate + '日';
-      return currentdate;
+    submitInfo() {
+      console.log(this.balance)
     }
   }
 }
 </script>
 <style lang="scss" scoped>
 .index-container {
+  background-color: #fff;
   padding: 12px;
   .high_light_text {
-    color: #000;
+    color: #fff;
     background: #da9862;
     text-align: center;
     margin: 0 auto;
+    margin-top: 20px;
     padding: 5px;
     border-radius: 3px;
   }
@@ -120,14 +117,10 @@ export default {
     padding: 10px;
     border: thin solid #333;
     border-radius: 5px;
-    margin-top: 30px;
-    &.bg_black {
-      color: #fff;
-      background: #333;
-    }
+    margin-top: 10px;
 
-    .van-row {
-      margin-top: 10px;
+    .van-row {  
+      line-height: 44px;
     }
     .van-col {
       text-align: center;
@@ -135,8 +128,8 @@ export default {
   }
   .footer {
     margin-top: 30px;
-   .van-col {
-      text-align: center;
+    .van-button--default {
+      border-color: #333;
     }
   }
 }

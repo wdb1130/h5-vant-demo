@@ -2,12 +2,24 @@
 <template>
   <div class="index-container">
     <div class="warpper">
-      <h1 class="demo-home__title"><img src="https://www.sunniejs.cn/static/weapp/logo.png" /><span> VUE H5开发模板</span></h1>
-      <h2 class="demo-home__desc">
-        A vue h5 template with Vant UI
-      </h2>
+      <h3 class="demo-home__title"><span> 用户列表</span></h3>
     </div>
-    <van-cell icon="success" v-for="item in list" :key="item" :title="item" />
+    <div class="user_list">
+      <van-search v-model="username" placeholder="请输入搜索账号" />
+      <van-row style="text-align: center">
+        <van-col span="12">账户</van-col>
+        <van-col span="12">操作</van-col>
+      </van-row>
+      <van-row v-for="item in list" :key="item">
+        <van-col span="12">{{ item}}</van-col>
+        <van-col span="4" @click="edit(item)">编辑</van-col>
+        <van-col span="4" @click="modifyPwd(item)">改密</van-col>
+        <van-col span="4" @click="del()">删除</van-col>
+      </van-row>
+    </div>
+    <div class="btn-wrapper">
+      <van-button type="info" plain size="large" @click="add()">新增用户</van-button>
+    </div>
   </div>
 </template>
 
@@ -15,25 +27,9 @@
 export default {
   data() {
     return {
-      list: [
-        'Vue-cli4',
-        '配置多环境变量',
-        'VantUI 组件按需加载',
-        'Sass 全局样式',
-        'Webpack 4',
-        'Vuex 状态管理',
-        'Axios 封装及接口管理',
-        'Vue-router',
-        'Webpack 4 vue.config.js 基础配置',
-        '配置 proxy 跨域',
-        '配置 alias 别名',
-        '配置 打包分析',
-        '配置 externals 引入 cdn 资源',
-        '去掉 console.log',
-        'splitChunks 单独打包第三方模块',
-        '添加 IE 兼容',
-        'Eslint+Pettier 统一开发规范'
-      ]
+      username: '',
+      list: [15839939923,15839939393,18399393923,13992393923,15839393923],
+      loading: true
     }
   },
 
@@ -41,35 +37,52 @@ export default {
 
   mounted() { },
 
-  methods: {}
+  methods: {
+    edit(id){
+      // 跳转编辑页面
+      this.$router.push({path:'/edit',query: {userId: id}});
+    },
+    modifyPwd(id){
+      // 修改密码
+      this.$router.push({path:'/modify',query: {userId: id,username: id}});
+    },
+    del(){
+
+    },
+    add(){
+      this.$router.push({path:'/modify'});
+    }
+  }
 }
 </script>
 <style lang="scss" scoped>
 .index-container {
+  padding: 10px;
   .warpper {
     padding: 12px;
     background: #fff;
     .demo-home__title {
       margin: 0 0 6px;
-      font-size: 32px;
-      .demo-home__title img,
-      .demo-home__title span {
-        display: inline-block;
-        vertical-align: middle;
-      }
-      img {
-        width: 32px;
-      }
+      font-size: 26px;
       span {
         margin-left: 16px;
         font-weight: 500;
       }
     }
-    .demo-home__desc {
-      margin: 0 0 20px;
-      color: rgba(69, 90, 100, 0.6);
-      font-size: 14px;
+  }
+  .user_list {
+    font-size: 14px;
+    padding: 10px;
+    border: thin solid #ccc;
+    .van-row {
+      margin-top: 10px;
     }
+    .van-col {
+      text-align: center;
+    }
+  }
+  .btn-wrapper {
+    margin-top: 40px;
   }
 }
 </style>
