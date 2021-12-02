@@ -3,9 +3,9 @@
   <div class="container">
     <div class="logo_wrapper">
       <van-image
-        width="100"
-        height="100"
-        src="https://img01.yzcdn.cn/vant/cat.jpeg"
+        width="120"
+        height="120"
+        :src="require('@/assets/logo.jpg')"
       />
     </div>
     <van-form @submit="onSubmit" class="form_wrapper">
@@ -52,16 +52,15 @@ export default {
 
   methods: {
     onSubmit(values){
-      console.log(this.$store.state)
       login(values).then((res)=>{
         // 判断用户信息
         // 普通用户
         this.$store.dispatch('setUserName', this.userName)
         this.$store.dispatch('setToken', res.data)
 
-        // this.$router.push('/info')
+        this.$router.push('/info')
         // 管理员
-        this.$router.push('/list')
+        // this.$router.push('/list')
       })
       .catch(() => { 
         Dialog.alert({

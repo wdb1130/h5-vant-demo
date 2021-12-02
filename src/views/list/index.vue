@@ -91,7 +91,9 @@ export default {
   .user_list {
     font-size: 14px;
     padding: 10px;
+    padding-bottom: 15px;
     border: thin solid #ccc;
+    border-radius: 4px;
     .van-row {
       margin-top: 10px;
     }

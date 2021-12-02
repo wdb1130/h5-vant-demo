@@ -1,5 +1,6 @@
 import api from './index'
 // axios
+import qs from 'qs'
 import request from '@/utils/request'
 
 // 登录
@@ -11,10 +12,23 @@ export function login(data) {
   })
 }
 
-// 用户信息 post 方法
-export function getUserInfo(data) {
+export function getUser(data) {
+  console.log(data)
   return request({
     url: api.UserInfo,
+    method: 'get',
+    // headers:{
+    //   'Content-type': 'application/x-www-form-urlencoded;charset=utf-8'
+    // },
+    data
+    // data:qs.stringify(data)
+  })
+}
+
+// 用户信息 post 方法
+export function showUserInfo(data) {
+  return request({
+    url: api.ShowUserInfo,
     method: 'post',
     data,
     hideloading: true
@@ -46,8 +60,7 @@ export function addUser(data) {
   return request({
     url: api.AddUser,
     method: 'post',
-    data,
-    hideloading: false
+    data
   })
 }
 
@@ -56,8 +69,7 @@ export function delUser(data) {
   return request({
     url: api.DelUser,
     method: 'get',
-    data,
-    hideloading: false
+    data
   })
 }
 

@@ -53,12 +53,12 @@ module.exports = {
     },
     proxy: {
       //配置跨域
-      '/sys': {
+      '/api': {
           target: 'http://120.27.131.91:8849',
           ws:true,
           changOrigin:true,
           pathRewrite:{
-              '^/sys':'/'
+              '^/api':'/'
           }
       }
     }

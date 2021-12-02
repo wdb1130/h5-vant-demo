@@ -1,10 +1,11 @@
 const api = {
   Login: '/sys/login',
-  UserInfo: '/user/userinfo',
+  UserInfo: '/sys/user/userInfo',
+  ShowUserInfo: '/show/info/userId',
   EditUserInfo: '/user/editUserInfo',
   UserList: '/sys/user/10/1/search',
   AddUser: '/sys/user',
-  DelUser: '/user/delUser',
+  DelUser: '/sys/user/delete',
   ModifyUser: '/sys/user/update/password',
   UserName: '/user/name'
 }

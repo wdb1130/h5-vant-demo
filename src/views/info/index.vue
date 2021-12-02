@@ -53,8 +53,8 @@
 </template>
 
 <script>
-import { getUserInfo } from '@/api/user.js'
-// import { mapGetters } from 'vuex'
+import { getUser,showUserInfo } from '@/api/user.js'
+import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
@@ -82,11 +82,12 @@ export default {
   },
 
   computed: {
-    // ...mapGetters(['userName'])
+    ...mapGetters(['userName'])
   },
 
   mounted() {
     this.currentDate = this.getNowFormatDate();
+    this.getUserId();
   },
 
   methods: {
@@ -104,13 +105,21 @@ export default {
       var currentdate = year + '年' + month + '月' + strDate + '日';
       return currentdate;
     },
-    initData() {
-      // 请求接口数据，仅作为展示，需要配置src->config下环境文件
-      const params = { user: 'sunnie' }
-      getUserInfo(params)
-        .then(() => { })
-        .catch(() => { })
+    getUserId(){
+      const params = { userName: this.userName }
+      getUser(params).then((res)=>{
+        //  showUserInfo({userId: res.id}).then((res2)=>{
+        //    console.log(res2)
+        // })
+      })
     },
+    // initData() {
+    //   // 请求接口数据，仅作为展示，需要配置src->config下环境文件
+    //   const params = { userName: this.userName }
+    //   getUserInfo(params).then(res => { 
+    //     const userId = res.id;
+    //   })
+    // },
   }
 }
 </script>
