@@ -13,15 +13,11 @@ export function login(data) {
 }
 
 export function getUser(data) {
-  console.log(data)
+
   return request({
-    url: api.UserInfo,
+    url: api.UserInfo+`?userName=${data.userName}`,
     method: 'get',
-    // headers:{
-    //   'Content-type': 'application/x-www-form-urlencoded;charset=utf-8'
-    // },
     data
-    // data:qs.stringify(data)
   })
 }
 
