@@ -10,8 +10,8 @@
     </div>
     <van-form @submit="onSubmit" class="form_wrapper">
       <van-field
-        v-model="username"
-        name="username"
+        v-model="userName"
+        name="userName"
         label="账号"
         placeholder="账号"
         :rules="[{ required: true, message: '请输入账号' }]"
@@ -33,30 +33,41 @@
 
 <script>
 import { login } from '@/api/user.js'
+import { mapGetters } from 'vuex'
+
 export default {
   data() {
     return {
-      username: '',
-      password: ''
+      userName: '18262345219',
+      password: '123456'
     }
   },
 
-  computed: {},
+  computed: {
+    ...mapGetters(['token'])
+  },
 
   mounted() {
   },
 
   methods: {
     onSubmit(values){
+      console.log(this.$store.state)
       login(values).then((res)=>{
         // 判断用户信息
         // 普通用户
-        this.$router.push('/info')
+        this.$store.dispatch('setUserName', this.userName)
+        this.$store.dispatch('setToken', res.data)
+
+        // this.$router.push('/info')
         // 管理员
-        // this.$router.push('/list')
+        this.$router.push('/list')
       })
       .catch(() => { 
-        console.log(111)
+        Dialog.alert({
+          message: '用户名或密码错误，请重新输入。',
+          theme: 'round-button',
+        })
       })
 
     }

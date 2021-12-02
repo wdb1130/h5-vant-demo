@@ -6,8 +6,8 @@
     </h3>
     <van-form @submit="onSubmit" class="form_wrapper">
       <van-field
-        v-model="username"
-        name="username"
+        v-model="userName"
+        name="userName"
         label="账号"
         placeholder="账号"
         :rules="[{ required: true, message: '请输入账号' }]"
@@ -32,8 +32,9 @@ import {modifyUser, addUser} from '@/api/user'
 export default {
   data() {
     return {
+      id: '',
       btnType: '',
-      username: '',
+      userName: '',
       password: ''
     }
   },
@@ -41,8 +42,9 @@ export default {
   computed: {},
   created(){
     const query = this.$route.query;
-    if(query.username){
-      this.username = query.username;
+    if(query.userName){
+      this.userName = query.userName;
+      this.id = query.userId;
       this.btnType = '编辑'
     }else {
       this.btnType = '新增'
@@ -52,15 +54,20 @@ export default {
 
   methods: {
     onSubmit(values){
-      console.log('submit', values)
-      const params = { userId: id }
+      console.log(values)
+      const params = { 
+        id: this.id,
+        password: values.password
+      }
       if(this.btnType === '新增'){
-        addUser(params).then(() => {
+        addUser(values).then(() => {
           this.$router.push({path:'/list'});
         })
       }else {
         modifyUser(params).then(() => {
-          this.$router.push({path:'/list'});
+          this.$dialog.alert({message: '修改成功！'}).then(()=>{
+            this.$router.push({path:'/list'});
+          })
         })
       }
     }

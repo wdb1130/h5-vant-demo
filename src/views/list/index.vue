@@ -5,16 +5,16 @@
       <h3 class="demo-home__title"><span> 用户列表</span></h3>
     </div>
     <div class="user_list">
-      <van-search v-model="username" placeholder="请输入搜索账号" />
+      <van-search v-model="userName" placeholder="请输入搜索账号" @search="onSearch"/>
       <van-row style="text-align: center">
         <van-col span="12">账户</van-col>
         <van-col span="12">操作</van-col>
       </van-row>
-      <van-row v-for="item in list" :key="item">
-        <van-col span="12">{{ item}}</van-col>
-        <van-col span="4" @click="edit(item)">编辑</van-col>
+      <van-row v-for="item in list" :key="item.id">
+        <van-col span="12">{{ item.userName}}</van-col>
+        <van-col span="4" @click="edit(item.id)">编辑</van-col>
         <van-col span="4" @click="modifyPwd(item)">改密</van-col>
-        <van-col span="4" @click="del()">删除</van-col>
+        <van-col span="4" @click="del(item.id)">删除</van-col>
       </van-row>
     </div>
     <div class="btn-wrapper">
@@ -24,34 +24,48 @@
 </template>
 
 <script>
-import { delUser, addUser } from '@/api/user.js'
+import { delUser, getUserList } from '@/api/user.js'
 export default {
   data() {
     return {
-      username: '',
-      list: [15839939923,15839939393,18399393923,13992393923,15839393923],
+      userName: '',
+      list: [],
+      oldList: [],
       loading: true
     }
   },
 
   computed: {},
 
-  mounted() { },
+  mounted() {
+    this.initData()
+  },
 
   methods: {
+    initData(){
+      // const params = {userName: this.userName};
+      getUserList().then(res =>{
+        this.list = res.data;
+        this.oldList = res.data;
+      }).catch(()=>{})
+    },
+    onSearch(){
+      this.list = this.oldList.filter(v=>~v.userName.indexOf(this.userName));
+    },
     edit(id){
       // 跳转编辑页面
       this.$router.push({path:'/edit',query: {userId: id}});
     },
-    modifyPwd(id){
+    modifyPwd(item){
       // 修改密码
-      this.$router.push({path:'/modify',query: {userId: id,username: id}});
+      this.$router.push({path:'/modify',query: {userId: item.id,userName: item.userName}});
     },
     del(id){
-      const params = { userId: id }
+      const params = { ids: id }
       delUser(params)
-      .then(() => { })
-      .catch(() => { })
+      .then(() => {
+        this.initData()
+      })
     },
     add(){
       this.$router.push({path:'/modify'});

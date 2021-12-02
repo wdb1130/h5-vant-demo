@@ -31,11 +31,11 @@ export function editUserInfo(data) {
   })
 }
 
-// 用户信息 post 方法
+// 用户信息 get 方法
 export function getUserList(data) {
   return request({
     url: api.UserList,
-    method: 'post',
+    method: 'get',
     data,
     hideloading: true
   })
@@ -65,7 +65,7 @@ export function delUser(data) {
 export function modifyUser(data) {
   return request({
     url: api.ModifyUser,
-    method: 'post',
+    method: 'put',
     data,
     hideloading: false
   })
