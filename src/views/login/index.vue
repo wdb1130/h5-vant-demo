@@ -38,8 +38,8 @@ import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
-      userName: '18262345219',
-      password: '123456'
+      userName: '',
+      password: ''
     }
   },
 
