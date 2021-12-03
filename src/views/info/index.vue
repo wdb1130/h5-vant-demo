@@ -7,29 +7,29 @@
         <van-col span="12"> {{userInfo.archiveDate}} </van-col>
       </van-row>
       <van-row>
-        <van-col span="8"> 型号 </van-col>
+        <van-col span="10"> 型号 </van-col>
         <van-col span="4"> 数量 </van-col>
-        <van-col span="6"> 在线数量 </van-col>
-        <van-col span="6"> 押金 </van-col>
+        <van-col span="5"> 在线数量 </van-col>
+        <van-col span="5"> 押金 </van-col>
       </van-row>
       <div class="list">
         <van-row>
-          <van-col span="8">{{ userInfo.typeOne}}</van-col>
+          <van-col span="10">{{ userInfo.typeOne}}</van-col>
           <van-col span="4">{{ userInfo.btcTotal}}</van-col>
-          <van-col span="6">{{ userInfo.btcOnlineTotal}}</van-col>
-          <van-col span="6">{{ userInfo.btcDeposit}}</van-col>
+          <van-col span="5">{{ userInfo.btcOnlineTotal}}</van-col>
+          <van-col span="5">{{ userInfo.btcDeposit}}</van-col>
         </van-row>
         <van-row>
-          <van-col span="8">{{ userInfo.typeTwo}}</van-col>
+          <van-col span="10">{{ userInfo.typeTwo}}</van-col>
           <van-col span="4">{{ userInfo.ethTotal}}</van-col>
-          <van-col span="6">{{ userInfo.ethOnlineTotal}}</van-col>
-          <van-col span="6">{{ userInfo.ethDeposit}}</van-col>
+          <van-col span="5">{{ userInfo.ethOnlineTotal}}</van-col>
+          <van-col span="5">{{ userInfo.ethDeposit}}</van-col>
         </van-row>
         <van-row>
-          <van-col span="8">{{ userInfo.typeThree}}</van-col>
+          <van-col span="10">{{ userInfo.typeThree}}</van-col>
           <van-col span="4">{{ userInfo.awlTotal}}</van-col>
-          <van-col span="6">{{ userInfo.awlOnlineTotal}}</van-col>
-          <van-col span="6">{{ userInfo.awlDeposit}}</van-col>
+          <van-col span="5">{{ userInfo.awlOnlineTotal}}</van-col>
+          <van-col span="5">{{ userInfo.awlDeposit}}</van-col>
         </van-row>
       </div>
     </div>

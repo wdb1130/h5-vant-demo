@@ -6,51 +6,51 @@
     </van-row>
     <div class="panel">
       <van-row>
-        <van-col span="8"> 型号 </van-col>
+        <van-col span="10"> 型号 </van-col>
         <van-col span="4"> 数量 </van-col>
-        <van-col span="6"> 在线数量 </van-col>
-        <van-col span="6"> 押金 </van-col>
+        <van-col span="5"> 在线数量 </van-col>
+        <van-col span="5"> 押金 </van-col>
       </van-row>
       <div class="list">
         <van-row>
-          <van-col span="8">
+          <van-col span="10">
             <van-field v-model="userInfo.typeOne"/>
           </van-col>
           <van-col span="4">
             <van-field v-model="userInfo.btcTotal"/>
           </van-col>
-          <van-col span="6">
+          <van-col span="5">
             <van-field v-model="userInfo.btcOnlineTotal"/>
           </van-col>
-          <van-col span="6">
+          <van-col span="5">
             <van-field v-model="userInfo.btcDeposit"/>
           </van-col>
         </van-row>
         <van-row>
-          <van-col span="8">
+          <van-col span="10">
             <van-field v-model="userInfo.typeTwo"/>
           </van-col>
           <van-col span="4">
             <van-field v-model="userInfo.ethTotal"/>
           </van-col>
-          <van-col span="6">
+          <van-col span="5">
             <van-field v-model="userInfo.ethOnlineTotal"/>
           </van-col>
-          <van-col span="6">
+          <van-col span="5">
             <van-field v-model="userInfo.ethDeposit"/>
           </van-col>
         </van-row>
         <van-row>
-          <van-col span="8">
+          <van-col span="10">
             <van-field v-model="userInfo.typeThree"/>
           </van-col>
           <van-col span="4">
             <van-field v-model="userInfo.awlTotal"/>
           </van-col>
-          <van-col span="6">
+          <van-col span="5">
             <van-field v-model="userInfo.awlOnlineTotal"/>
           </van-col>
-          <van-col span="6">
+          <van-col span="5">
             <van-field v-model="userInfo.awlDeposit"/>
           </van-col>
         </van-row>
