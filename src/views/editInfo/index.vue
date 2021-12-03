@@ -2,7 +2,7 @@
 <template>
   <div class="index-container">
     <van-row class="high_light_text" style="width: 120px;">
-      账户：{{17737373732}}
+      账户：{{userName}}
     </van-row>
     <div class="panel">
       <van-row>
@@ -11,19 +11,47 @@
         <van-col span="6"> 在线数量 </van-col>
         <van-col span="6"> 押金 </van-col>
       </van-row>
-      <div class="list" v-for="(item, idx) in equipmet" :key="idx" >
+      <div class="list">
         <van-row>
           <van-col span="8">
-            <van-field v-model="item.type"/>
+            <van-field v-model="userInfo.typeOne"/>
           </van-col>
           <van-col span="4">
-            <van-field v-model="item.num"/>
+            <van-field v-model="userInfo.btcTotal"/>
           </van-col>
           <van-col span="6">
-            <van-field v-model="item.onlineNum"/>
+            <van-field v-model="userInfo.btcOnlineTotal"/>
           </van-col>
           <van-col span="6">
-            <van-field v-model="item.USDT"/>
+            <van-field v-model="userInfo.btcDeposit"/>
+          </van-col>
+        </van-row>
+        <van-row>
+          <van-col span="8">
+            <van-field v-model="userInfo.typeTwo"/>
+          </van-col>
+          <van-col span="4">
+            <van-field v-model="userInfo.ethTotal"/>
+          </van-col>
+          <van-col span="6">
+            <van-field v-model="userInfo.ethOnlineTotal"/>
+          </van-col>
+          <van-col span="6">
+            <van-field v-model="userInfo.ethDeposit"/>
+          </van-col>
+        </van-row>
+        <van-row>
+          <van-col span="8">
+            <van-field v-model="userInfo.typeThree"/>
+          </van-col>
+          <van-col span="4">
+            <van-field v-model="userInfo.awlTotal"/>
+          </van-col>
+          <van-col span="6">
+            <van-field v-model="userInfo.awlOnlineTotal"/>
+          </van-col>
+          <van-col span="6">
+            <van-field v-model="userInfo.awlDeposit"/>
           </van-col>
         </van-row>
       </div>
@@ -32,24 +60,44 @@
     <div class="panel">
       <van-row>
         <van-col span="12"> 电费余额 </van-col>
-        <van-col span="12"> *** </van-col>
+        <van-col span="12"> 
+          <van-field v-model="userInfo.dfBalance"/>  
+        </van-col>
       </van-row>
-      <div class="list" v-for="(item, idx) in balance" :key="idx+item.type" >
+      <div class="list">
         <van-row>
-          <van-col span="12">{{ item.type}}</van-col>
+          <van-col span="12">USDT</van-col>
           <van-col span="12">
-            <van-field v-model="item.money"/>
+            <van-field v-model="userInfo.usdtBalance"/>
+          </van-col>
+        </van-row>
+        <van-row>
+          <van-col span="12">BTC</van-col>
+          <van-col span="12">
+            <van-field v-model="userInfo.btcBalance"/>
+          </van-col>
+        </van-row>
+        <van-row>
+          <van-col span="12">ETH</van-col>
+          <van-col span="12">
+            <van-field v-model="userInfo.ethBalance"/>
           </van-col>
         </van-row>
       </div>
     </div>
     <p class="high_light_text" style="width: 80px;">昨日产出</p>
     <div class="panel">
-      <div class="list" v-for="(item, idx) in produce" :key="idx+item.type" >
+      <div class="list">
         <van-row>
-          <van-col span="12">{{ item.type}}</van-col>
+          <van-col span="12">BTC</van-col>
           <van-col span="12">
-            <van-field v-model="item.money"/>
+            <van-field v-model="userInfo.btcOutput"/>
+          </van-col>
+        </van-row>
+        <van-row>
+          <van-col span="12">ETH</van-col>
+          <van-col span="12">
+            <van-field v-model="userInfo.ethOutput"/>
           </van-col>
         </van-row>
       </div>
@@ -61,51 +109,52 @@
 </template>
 
 <script>
-import { editUserInfo } from '@/api/user.js'
+import { editUserInfo,showUserInfo } from '@/api/user.js'
+
 export default {
   data() {
     return {
       currentDate: '',
-      equipmet: [
-        {type: '神马', num: 10, onlineNum: 8, USDT: 'xxx'},
-        {type: '联想', num: 2, onlineNum: 1, USDT: 'xxx'},
-        {type: '拯救者', num: 2, onlineNum: 1, USDT: 'xxx'},
-        {type: '神州', num: 2, onlineNum: 1, USDT: 'xxx'},
-      ],
-      // 电费余额
-      balance: [
-        {type: 'USB',  money: 88},
-        {type: 'UST',  money: 11},
-        {type: 'USB',  money: 88},
-        {type: 'USB',  money: 88},
-      ],
-      // 产出
-      produce: [
-        {type: 'UST',  money: 11},
-        {type: 'USB',  money: 88},
-        {type: 'USB',  money: 88},
-      ],
+      userInfo: {},
+      userId: '',
+      userName: ''
     }
   },
 
-  computed: {},
+  computed: {
+  },
 
+  created(){
+    const query = this.$route.query;
+    this.userId = query.userId;
+    this.userName = query.userName;
+    this.initData()
+  },
   mounted() {
   },
 
   methods: {
     submitInfo() {
-      console.log(this.balance);
-      const param = {};
-      editUserInfo(param).then((res)=>{
-        // 跳转至list页面 ? 
-        this.$router.push('/list');
+      console.log(this.userInfo);
+      const params = this.userInfo;
+      editUserInfo(params).then((res)=>{
         // dialog 修改成功
+        this.$dialog.alert({message:'修改成功！'}).then(()=>{
+          // 跳转至list页面 ? 
+          this.$router.push('/list');
+        })
       }).
       catch(()=>{
 
       })
-    }
+    },
+    initData() {
+      // 请求接口数据，仅作为展示，需要配置src->config下环境文件
+      const params = { userId: this.userId }
+      showUserInfo(params).then((res)=>{
+        this.userInfo = res.data;
+      })
+    },
   }
 }
 </script>

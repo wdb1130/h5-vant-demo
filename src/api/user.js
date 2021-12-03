@@ -25,8 +25,8 @@ export function getUser(data) {
 export function showUserInfo(data) {
   return request({
     url: api.ShowUserInfo,
-    method: 'post',
-    data,
+    method: 'get',
+    params: data,
     hideloading: true
   })
 }
@@ -36,8 +36,7 @@ export function editUserInfo(data) {
   return request({
     url: api.EditUserInfo,
     method: 'post',
-    data,
-    hideloading: true
+    data
   })
 }
 
@@ -46,8 +45,7 @@ export function getUserList(data) {
   return request({
     url: api.UserList,
     method: 'get',
-    data,
-    hideloading: true
+    data
   })
 }
 
@@ -63,9 +61,10 @@ export function addUser(data) {
 // 删除用户 get
 export function delUser(data) {
   return request({
-    url: api.DelUser,
-    method: 'get',
-    data
+    url: api.DelUser+`?ids=${data}`,
+    method: 'delete',
+    // url: api.DelUser,
+    // data: qs.stringify(data)
   })
 }
 
@@ -74,8 +73,7 @@ export function modifyUser(data) {
   return request({
     url: api.ModifyUser,
     method: 'put',
-    data,
-    hideloading: false
+    data
   })
 }
 

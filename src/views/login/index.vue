@@ -55,12 +55,17 @@ export default {
       login(values).then((res)=>{
         // 判断用户信息
         // 普通用户
+        const token = res.data.token;
+        const {userType, id:userId} = res.data.userVo;
         this.$store.dispatch('setUserName', this.userName)
-        this.$store.dispatch('setToken', res.data)
+        this.$store.dispatch('setToken', token)
 
-        this.$router.push('/info')
-        // 管理员
-        // this.$router.push('/list')
+        // 管理员 
+        if(userType === 0){
+          this.$router.push('/list')
+        }else {
+          this.$router.push({path:'/info',query: {userId: userId}})
+        }
       })
       .catch(() => { 
         Dialog.alert({
