@@ -135,7 +135,7 @@ export default {
 
   methods: {
     submitInfo() {
-      console.log(this.userInfo);
+      this.userInfo.userId = this.userId
       const params = this.userInfo;
       editUserInfo(params).then((res)=>{
         // dialog 修改成功
