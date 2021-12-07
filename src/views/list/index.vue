@@ -14,7 +14,7 @@
         <van-col span="12">{{ item.userName}}</van-col>
         <van-col span="4" @click="edit(item)">编辑</van-col>
         <van-col span="4" @click="modifyPwd(item)">改密</van-col>
-        <van-col span="4" @click="del(item.id)">删除</van-col>
+        <van-col span="4" @click="del(item)">删除</van-col>
       </van-row>
     </div>
     <div class="btn-wrapper">
@@ -42,33 +42,36 @@ export default {
   },
 
   methods: {
-    initData(){
-      const params = {userName: this.userName};
-      getUserList(params).then(res =>{
-        this.list = res.data;
-        this.oldList = res.data;
-      }).catch(()=>{})
+    initData() {
+      const params = { userName: this.userName }
+      getUserList(params).then(res => {
+        this.list = res.data
+        this.oldList = res.data
+      }).catch(() => {})
     },
-    onSearch(){
-      this.list = this.oldList.filter(v=>~v.userName.indexOf(this.userName));
+    onSearch() {
+      this.list = this.oldList.filter(v => ~v.userName.indexOf(this.userName))
     },
-    edit(item){
+    edit(item) {
       // 跳转编辑页面
-      const {id: userId,userName} = item;
-      this.$router.push({path:'/edit',query: {userId: userId,userName: userName}});
+      const { id: userId, userName } = item
+      this.$router.push({ path: '/edit', query: { userId: userId, userName: userName }})
     },
-    modifyPwd(item){
+    modifyPwd(item) {
       // 修改密码
-      this.$router.push({path:'/modify',query: {userId: item.id,userName: item.userName}});
+      this.$router.push({ path: '/modify', query: { userId: item.id, userName: item.userName }})
     },
-    del(id){
+    del(item) {
       // const params = { ids: id }
-      delUser(id).then(() => {
-        this.initData()
-      })
+      const { id, userName } = item
+      this.$dialog.confirm({ title: '提醒', message: `是否确认删除${userName}账号吗？` }).then(() => {
+        delUser(id).then(() => {
+          this.initData()
+        })
+      }).catch(() => {})
     },
-    add(){
-      this.$router.push({path:'/modify'});
+    add() {
+      this.$router.push({ path: '/modify' })
     }
   }
 }

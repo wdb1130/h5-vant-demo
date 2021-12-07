@@ -6,30 +6,34 @@
         <van-col span="12"> 账户：{{userName}} </van-col>
         <van-col span="12"> {{userInfo.archiveDate}} </van-col>
       </van-row>
-      <van-row>
-        <van-col span="10"> 型号 </van-col>
-        <van-col span="4"> 数量 </van-col>
-        <van-col span="5"> 在线数量 </van-col>
+      <van-row class="title-wrapper">
+        <van-col span="9"> 型号 </van-col>
+        <van-col span="3"> 数量 </van-col>
+        <van-col span="3"> 在线数量 </van-col>
         <van-col span="5"> 押金 </van-col>
+        <van-col span="4"> 每日<br>电费 </van-col>
       </van-row>
       <div class="list">
         <van-row>
-          <van-col span="10">{{ userInfo.typeOne}}</van-col>
-          <van-col span="4">{{ userInfo.btcTotal}}</van-col>
-          <van-col span="5">{{ userInfo.btcOnlineTotal}}</van-col>
+          <van-col span="9">{{ userInfo.typeOne}}</van-col>
+          <van-col span="3">{{ userInfo.btcTotal}}</van-col>
+          <van-col span="3">{{ userInfo.btcOnlineTotal}}</van-col>
           <van-col span="5">{{ userInfo.btcDeposit}}</van-col>
+          <van-col span="4">{{ userInfo.btcDf}}</van-col>
         </van-row>
         <van-row>
-          <van-col span="10">{{ userInfo.typeTwo}}</van-col>
-          <van-col span="4">{{ userInfo.ethTotal}}</van-col>
-          <van-col span="5">{{ userInfo.ethOnlineTotal}}</van-col>
+          <van-col span="9">{{ userInfo.typeTwo}}</van-col>
+          <van-col span="3">{{ userInfo.ethTotal}}</van-col>
+          <van-col span="3">{{ userInfo.ethOnlineTotal}}</van-col>
           <van-col span="5">{{ userInfo.ethDeposit}}</van-col>
+          <van-col span="4">{{ userInfo.ethDf}}</van-col>
         </van-row>
         <van-row>
-          <van-col span="10">{{ userInfo.typeThree}}</van-col>
-          <van-col span="4">{{ userInfo.awlTotal}}</van-col>
-          <van-col span="5">{{ userInfo.awlOnlineTotal}}</van-col>
+          <van-col span="9">{{ userInfo.typeThree}}</van-col>
+          <van-col span="3">{{ userInfo.awlTotal}}</van-col>
+          <van-col span="3">{{ userInfo.awlOnlineTotal}}</van-col>
           <van-col span="5">{{ userInfo.awlDeposit}}</van-col>
+          <van-col span="4">{{ userInfo.awlDf}}</van-col>
         </van-row>
       </div>
     </div>
@@ -85,9 +89,9 @@ export default {
     return {
       // currentDate: '',
       userId: '',
-      userInfo: {},
+      userInfo: {}
       // equipmet: [
-      //   {type: 'BTC-神马', num: 10, onlineNum: 8, USDT: 'xxx'},
+      //   {type: 'BTC-神马', num: 9, onlineNum: 8, USDT: 'xxx'},
       //   {type: 'ETH-ETMINEV', num: 2, onlineNum: 1, USDT: 'xxx'},
       //   {type: '阿瓦隆83T', num: 2, onlineNum: 1, USDT: 'xxx'},
       // ],
@@ -110,13 +114,13 @@ export default {
     ...mapGetters(['userName'])
   },
   created() {
-    const query = this.$route.query;
-    this.userId = query.userId;
+    const query = this.$route.query
+    this.userId = query.userId
   },
 
   mounted() {
     // this.currentDate = this.getNowFormatDate();
-    this.initData();
+    this.initData()
   },
 
   methods: {
@@ -138,10 +142,10 @@ export default {
       // 请求接口数据，仅作为展示，需要配置src->config下环境文件
       const params = { userId: this.userId }
       console.log(params)
-      showUserInfo(params).then((res)=>{
-        this.userInfo = res.data;
+      showUserInfo(params).then((res) => {
+        this.userInfo = res.data
       })
-    },
+    }
   }
 }
 </script>
@@ -154,6 +158,8 @@ export default {
     text-align: center;
     margin: 0 auto;
     padding: 5px;
+    line-height: 25px !important;
+    margin-bottom: 10px;
     border-radius: 3px;
   }
   .panel {
@@ -166,9 +172,11 @@ export default {
       color: #fff;
       background: #333;
     }
-
     .van-row {
-      margin-top: 15px;
+      line-height: 44px;
+    }
+     .title-wrapper {
+      line-height: 22px;
     }
     .van-col {
       text-align: center;

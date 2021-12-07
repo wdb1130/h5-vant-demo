@@ -5,53 +5,63 @@
       账户：{{userName}}
     </van-row>
     <div class="panel">
-      <van-row>
-        <van-col span="10"> 型号 </van-col>
-        <van-col span="4"> 数量 </van-col>
-        <van-col span="5"> 在线数量 </van-col>
+      <van-row class="title-wrapper">
+        <van-col span="9"> 型号 </van-col>
+        <van-col span="3"> 数量 </van-col>
+        <van-col span="3"> 在线数量 </van-col>
         <van-col span="5"> 押金 </van-col>
+        <van-col span="4"> 每日 <br> 电费 </van-col>
       </van-row>
       <div class="list">
         <van-row>
-          <van-col span="10">
+          <van-col span="9">
             <van-field v-model="userInfo.typeOne"/>
           </van-col>
-          <van-col span="4">
+          <van-col span="3">
             <van-field v-model="userInfo.btcTotal"/>
           </van-col>
-          <van-col span="5">
+          <van-col span="3">
             <van-field v-model="userInfo.btcOnlineTotal"/>
           </van-col>
           <van-col span="5">
             <van-field v-model="userInfo.btcDeposit"/>
           </van-col>
+          <van-col span="4">
+            <van-field v-model="userInfo.btcDf"/>
+          </van-col>
         </van-row>
         <van-row>
-          <van-col span="10">
+          <van-col span="9">
             <van-field v-model="userInfo.typeTwo"/>
           </van-col>
-          <van-col span="4">
+          <van-col span="3">
             <van-field v-model="userInfo.ethTotal"/>
           </van-col>
-          <van-col span="5">
+          <van-col span="3">
             <van-field v-model="userInfo.ethOnlineTotal"/>
           </van-col>
           <van-col span="5">
             <van-field v-model="userInfo.ethDeposit"/>
           </van-col>
+          <van-col span="4">
+            <van-field v-model="userInfo.ethDf"/>
+          </van-col>
         </van-row>
         <van-row>
-          <van-col span="10">
+          <van-col span="9">
             <van-field v-model="userInfo.typeThree"/>
           </van-col>
-          <van-col span="4">
+          <van-col span="3">
             <van-field v-model="userInfo.awlTotal"/>
           </van-col>
-          <van-col span="5">
+          <van-col span="3">
             <van-field v-model="userInfo.awlOnlineTotal"/>
           </van-col>
           <van-col span="5">
             <van-field v-model="userInfo.awlDeposit"/>
+          </van-col>
+          <van-col span="4">
+            <van-field v-model="userInfo.awlDf"/>
           </van-col>
         </van-row>
       </div>
@@ -60,8 +70,8 @@
     <div class="panel">
       <van-row>
         <van-col span="12"> 电费余额 </van-col>
-        <van-col span="12"> 
-          <van-field v-model="userInfo.dfBalance"/>  
+        <van-col span="12">
+          <van-field v-model="userInfo.dfBalance"/>
         </van-col>
       </van-row>
       <div class="list">
@@ -109,7 +119,7 @@
 </template>
 
 <script>
-import { editUserInfo,showUserInfo } from '@/api/user.js'
+import { editUserInfo, showUserInfo } from '@/api/user.js'
 
 export default {
   data() {
@@ -124,10 +134,10 @@ export default {
   computed: {
   },
 
-  created(){
-    const query = this.$route.query;
-    this.userId = query.userId;
-    this.userName = query.userName;
+  created() {
+    const query = this.$route.query
+    this.userId = query.userId
+    this.userName = query.userName
     this.initData()
   },
   mounted() {
@@ -135,26 +145,26 @@ export default {
 
   methods: {
     submitInfo() {
-      console.log(this.userInfo);
-      const params = this.userInfo;
-      editUserInfo(params).then((res)=>{
+      this.userInfo.userId = this.userId
+      const params = this.userInfo
+      editUserInfo(params).then((res) => {
         // dialog 修改成功
-        this.$dialog.alert({message:'修改成功！'}).then(()=>{
-          // 跳转至list页面 ? 
-          this.$router.push('/list');
+        this.$dialog.alert({ message: '修改成功！' }).then(() => {
+          // 跳转至list页面 ?
+          this.$router.push('/list')
         })
-      }).
-      catch(()=>{
-
       })
+        .catch(() => {
+
+        })
     },
     initData() {
       // 请求接口数据，仅作为展示，需要配置src->config下环境文件
       const params = { userId: this.userId }
-      showUserInfo(params).then((res)=>{
-        this.userInfo = res.data;
+      showUserInfo(params).then((res) => {
+        this.userInfo = res.data
       })
-    },
+    }
   }
 }
 </script>
@@ -169,6 +179,7 @@ export default {
     margin: 0 auto;
     margin-top: 20px;
     padding: 5px;
+    line-height: 25px;
     border-radius: 3px;
   }
   .panel {
@@ -178,11 +189,21 @@ export default {
     border-radius: 5px;
     margin-top: 10px;
 
-    .van-row {  
+    .van-row {
       line-height: 44px;
+    }
+    .title-wrapper {
+      line-height: 22px;
     }
     .van-col {
       text-align: center;
+      .van-cell {
+        padding: 10px 5px;
+      }
+      .van-field__control {
+        border-bottom: #eee;
+        text-align: center;
+      }
     }
   }
   .footer {

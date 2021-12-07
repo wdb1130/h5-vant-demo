@@ -1,6 +1,6 @@
 import api from './index'
 // axios
-import qs from 'qs'
+// import qs from 'qs'
 import request from '@/utils/request'
 
 // 登录
@@ -13,9 +13,8 @@ export function login(data) {
 }
 
 export function getUser(data) {
-
   return request({
-    url: api.UserInfo+`?userName=${data.userName}`,
+    url: api.UserInfo + `?userName=${data.userName}`,
     method: 'get',
     data
   })
@@ -26,8 +25,7 @@ export function showUserInfo(data) {
   return request({
     url: api.ShowUserInfo,
     method: 'get',
-    params: data,
-    hideloading: true
+    params: data
   })
 }
 
@@ -61,8 +59,8 @@ export function addUser(data) {
 // 删除用户 get
 export function delUser(data) {
   return request({
-    url: api.DelUser+`?ids=${data}`,
-    method: 'delete',
+    url: api.DelUser + `?ids=${data}`,
+    method: 'delete'
     // url: api.DelUser,
     // data: qs.stringify(data)
   })
@@ -76,7 +74,6 @@ export function modifyUser(data) {
     data
   })
 }
-
 
 // 用户名称 get 方法
 export function getUserName(params) {
