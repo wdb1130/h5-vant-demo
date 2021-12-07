@@ -4,13 +4,13 @@
     <div class="panel bg_black">
       <van-row class="high_light_text">
         <van-col span="12"> 账户：{{userName}} </van-col>
-        <van-col span="12"> {{userInfo.archiveDate}} </van-col>
+        <van-col span="12" style="text-align: right; padding-right: 5px;"> {{userInfo.archiveDate}} </van-col>
       </van-row>
       <van-row class="title-wrapper">
-        <van-col span="9"> 型号 </van-col>
-        <van-col span="3"> 数量 </van-col>
-        <van-col span="3"> 在线数量 </van-col>
-        <van-col span="5"> 押金 </van-col>
+        <van-col span="9" class="lineheight44"> 型号 </van-col>
+        <van-col span="3" class="lineheight44"> 数量 </van-col>
+        <van-col span="3"> 在线<br>数量 </van-col>
+        <van-col span="5" class="lineheight44"> 押金 </van-col>
         <van-col span="4"> 每日<br>电费 </van-col>
       </van-row>
       <div class="list">
@@ -87,27 +87,8 @@ import { mapGetters } from 'vuex'
 export default {
   data() {
     return {
-      // currentDate: '',
       userId: '',
       userInfo: {}
-      // equipmet: [
-      //   {type: 'BTC-神马', num: 9, onlineNum: 8, USDT: 'xxx'},
-      //   {type: 'ETH-ETMINEV', num: 2, onlineNum: 1, USDT: 'xxx'},
-      //   {type: '阿瓦隆83T', num: 2, onlineNum: 1, USDT: 'xxx'},
-      // ],
-      // // 电费余额
-      // balance: [
-      //   {type: 'USB',  money: 88},
-      //   {type: 'UST',  money: 11},
-      //   {type: 'USB',  money: 88},
-      //   {type: 'USB',  money: 88},
-      // ],
-      // // 产出
-      // produce: [
-      //   {type: 'UST',  money: 11},
-      //   {type: 'USB',  money: 88},
-      //   {type: 'USB',  money: 88},
-      // ],
     }
   },
   computed: {
@@ -119,25 +100,10 @@ export default {
   },
 
   mounted() {
-    // this.currentDate = this.getNowFormatDate();
     this.initData()
   },
 
   methods: {
-    // getNowFormatDate() {
-    //   var date = new Date();
-    //   var year = date.getFullYear();
-    //   var month = date.getMonth() + 1;
-    //   var strDate = date.getDate();
-    //   if (month >= 1 && month <= 9) {
-    //       month = "0" + month;
-    //   }
-    //   if (strDate >= 0 && strDate <= 9) {
-    //       strDate = "0" + strDate;
-    //   }
-    //   var currentdate = year + '年' + month + '月' + strDate + '日';
-    //   return currentdate;
-    // },
     initData() {
       // 请求接口数据，仅作为展示，需要配置src->config下环境文件
       const params = { userId: this.userId }
@@ -180,6 +146,9 @@ export default {
     }
     .van-col {
       text-align: center;
+    }
+    .lineheight44 {
+      line-height: 44px;
     }
   }
   .footer {

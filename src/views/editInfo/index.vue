@@ -6,10 +6,10 @@
     </van-row>
     <div class="panel">
       <van-row class="title-wrapper">
-        <van-col span="9"> 型号 </van-col>
-        <van-col span="3"> 数量 </van-col>
-        <van-col span="3"> 在线数量 </van-col>
-        <van-col span="5"> 押金 </van-col>
+        <van-col span="9" class="lineheight44"> 型号 </van-col>
+        <van-col span="3" class="lineheight44"> 数量 </van-col>
+        <van-col span="3"> 在线 <br> 数量 </van-col>
+        <van-col span="5" class="lineheight44"> 押金 </van-col>
         <van-col span="4"> 每日 <br> 电费 </van-col>
       </van-row>
       <div class="list">
@@ -204,6 +204,9 @@ export default {
         border-bottom: #eee;
         text-align: center;
       }
+    }
+        .lineheight44 {
+      line-height: 44px;
     }
   }
   .footer {
